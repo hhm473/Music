@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎来到欣乐</title>
+ 
+</head>
+<link rel="stylesheet" type="text/css" href="music.css"/>
+<body>
+    <canvas class="mycanvas" width="310px" height="310px"></canvas>
+    <!-- <img src="D:/VSCode/Study/Vue/images/timg.jpg" alt=""> -->
+    <div id="app">
+        <div id="top">
+            <span class="title">欣乐</span>
+            <span class=title_small>—你喜欢的音乐都在这里</span>
+            <div class="intkuang"> 
+                <input type="text" placeholder="音乐相关" class="input" autocomplete="off"
+                v-model="query" @keyup.enter="searchmusic"/>
+                <button class="button" @click="searchmusic">搜索</button>
+            </div>
+        </div>
+    <!--左边--------------------------------  -->
+        <div id="left">
+            <ul>
+                <li v-for="(item,key) in musiclist">
+                    <span><img src=".\images\botton.png" alt=""  class="img1" v-show="ishave" style="display: none;"
+                         @click="playmusic(item,key)"></span> 
+                         <span id="mname" v-text="item.name" @click="playmusic(item,key)"></span>
+                         <span>
+                             <img src=".\images\mv.png" alt="" class="img2" v-if="item.mvid!=0" @click="playMV(item.mvid)" v-show="ishave" style="display: none;">
+                            </span>
+                </li>
+            </ul>
+        </div>
+    <!--中间--------------------------------  -->
+        <div id="center">
+            <div class="centerimg">
+                <img class="blackcircle" src="./images/blackcircle.png" alt="" v-show="isplay" style="display: none;">           
+            </div>
+            <img class="cover" :src="musiccover" alt="" v-show="isplay">
+            <div class="centername" v-text="musicname"></div>
+            <img src="./images/last.png" class="last" @click="last" v-show="isplay" style="display: none;">
+                <img src="./images/next.png" class="next" @click="next" v-show="isplay" style="display: none;">
+        </div>
+    <!--右边--------------------------------  -->
+        <div id="right">
+            <h5>热门评论</h5>
+            <div class="commentbox">
+                <dl v-for="item in commentlist">
+                    <dt><img :src="item.user.avatarUrl" alt=""></dt>
+                    <dd class="cname" v-text="item.user.nickname"></dd>
+                    <dd class="cc" v-text="item.content"></dd>
+                </dl>
+            </div>
+        </div>
+    <!--底部----------------------------------  -->
+        <div id="bottom">
+            <audio ref="audio" :src="musicurl" @play="play" @pause="pause" controls="controls" autoplay="autoplay" loop="loop" class="myaudio"></audio> 
+        </div>
+    <!-- mv --------------------------------------->
+        <div class="mvdiv" v-show="isshow" style="display: none;" @click="cshow">
+            <video :src="mvurl" controls="controls"></video>
+            <div class="mark"></div>
+        </div>
+    </div>
+
+    <script src="https:cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./music.js"></script>
+
+    <script>
+        var my=document.querySelector("canvas");
+        var ctx=my.getContext('2d');
+
+
+
+        function play(){
+            ctx.clearRect(0,0,my.width,my.height);
+            ctx.save();
+            ctx.translate(my.width/2,my.height/2);
+            biaopan();
+            run();
+            ctx.restore();
+            requestAnimationFrame(play);
+        }
+        
+       play();
+       
+        function biaopan(){
+
+         //绘制表盘
+        ctx.strokeStyle="#777";
+        ctx.lineWidth=6;
+        ctx.beginPath();
+        ctx.arc(0,0,150,0,2*Math.PI);
+        ctx.stroke();
+
+        //分刻度
+        ctx.strokeStyle="#f7f";
+        ctx.lineWidth=2;
+        for(var i=1;i<=60;i++){
+            ctx.beginPath();
+            ctx.moveTo(0,-135);
+            ctx.lineTo(0,-145);
+            ctx.stroke();
+            ctx.rotate(2*Math.PI/60);
+        }
+        //刻度
+        ctx.lineWidth=6;
+        ctx.strokeStyle="#17f";
+        for(var i=1;i<=12;i++){
+            ctx.beginPath();
+            ctx.moveTo(0,-125);
+            ctx.lineTo(0,-145);
+            ctx.stroke();
+            ctx.rotate(2*Math.PI/12);
+        }
+        //数字
+      
+        for(var i=1;i<=12;i++){
+            ctx.beginPath();
+            ctx.fillStyle="green"
+            ctx.textAlign="center";
+            ctx.textBaseline="middle";
+            ctx.font="20px 微软雅黑"
+            ctx.fillText(i,Math.sin(2*Math.PI/12*i)*115,
+            Math.cos(2*Math.PI/12*i)*(-115));
+            
+        }
+        }
+       
+        function run(){
+        var d=new Date();
+        var h=d.getHours();
+        var m=d.getMinutes();
+        var s=d.getSeconds();
+
+        //时针
+        ctx.save();
+        ctx.beginPath();
+        ctx.strokeStyle="#a71"
+        ctx.lineWidth=8;
+        ctx.rotate(2*Math.PI/12*h+(2*Math.PI/60*m+(2*Math.PI/60*s)/60)/12)
+        ctx.moveTo(0,16);
+        ctx.lineTo(0,-70);
+        ctx.stroke();
+        ctx.restore();       
+        //分针
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth=4;
+        ctx.strokeStyle="#f71";
+        ctx.rotate(2*Math.PI/60*m+(2*Math.PI/60*s)/60);
+        ctx.moveTo(0,20);
+        ctx.lineTo(0,-100);
+        ctx.stroke();
+        ctx.restore();     
+        //秒针
+        ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth=4;
+        ctx.strokeStyle="#f00";
+        ctx.rotate(2*Math.PI/60*s)
+        ctx.moveTo(0,20);
+        ctx.lineTo(0,-110);
+        ctx.stroke();
+        ctx.restore();     
+        //小纽扣
+        // ctx.save();
+        ctx.fillStyle="#777"
+        ctx.strokeStyle="yellow"
+        ctx.beginPath();
+        ctx.arc(0,0,10,0,2*Math.PI)
+        ctx.fill();
+        ctx.stroke();
+        // ctx.restore(); 
+        }
+        
+
+    </script>
+<!-- <script>
+    // var app=document.querySelector("#app");
+    // var top=document.querySelector("#top");
+
+    // top.addEventListener("mousedown",function (e) {
+    //   var x=e.pageX;
+    //   var y=e.pageY;
+
+    //   function ms(e) {
+    //     app.style.left=e.pageX-x+"px";
+    //     app.style.top=e.pageY-y+"px";
+    //   }
+    //   document.addEventListener("mousemove",ms);
+
+    //   document.addEventListener("mouseup",function () {
+    //     document.removeEventListener("mousemove",ms);
+    //   })
+    // })
+
+    
+</script> -->
+</body>
+
+
+<!-- <script>
+  
+</script> -->
+</html>

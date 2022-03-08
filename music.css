@@ -1,0 +1,336 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: url("./images/timg.jpg");
+    box-sizing: 100% 100%;
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+canvas{
+    position: absolute;
+    margin: 150px 60px;
+}
+
+img{
+    display: inline-block;
+    width: 100%;
+    height: 800px;
+    z-index: -1;
+}
+
+#app{
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 60px 550px;
+    border-radius: 5px;
+    
+}
+
+#top{
+    float: left;
+    width: 100%;
+    height: 60px;
+    background-color: rgb(90, 235, 235);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    /* opacity: 1 !important; */
+}
+
+#left{
+    overflow-y: scroll;
+    float: left;
+    width: 200px;
+    height: 500px;
+    background-color: #fff;
+    opacity: 0.7;
+}
+#left::-webkit-scrollbar {
+    width: 4px;    
+    /*height: 4px;*/
+}
+#left::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0);
+    background: rgba(0,0,0,0.2);
+}
+#left::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+
+}
+#right::-webkit-scrollbar {
+    width: 4px;    
+    /*height: 4px;*/
+}
+#right::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0);
+    background: rgba(0,0,0,0.2);
+}
+#right::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+
+}
+
+#center{
+    position: relative;
+    float: left;
+    width: 400px;
+    height: 500px;
+    background-color: #fff;
+    /* opacity: 0.4; */
+    background:  rgba(250, 250, 250, 0.7);
+}
+#right{
+    overflow-y: scroll;
+    float: left;
+    width: 195px;
+    height: 500px;
+    background-color: #fff;
+    background:  rgba(250, 250, 250, 0.7);
+    border-left: rgba(174, 165, 170, 0.2) solid 4px;
+}
+#bottom{
+    float: left;
+    width: 100%;
+    height: 40px;
+    /* background-color: purple; */
+    border-bottom-left-radius:5px ;
+    border-bottom-right-radius:5px ;
+
+}
+
+.title{
+    float: left;
+    font-size: 32px;
+    font-family: cursive;
+    color: white;
+    margin-top: 13px;
+    text-indent: 1em;
+    letter-spacing: 8px;
+}
+
+.title_small{
+    float: left;
+    font-size: 14px;
+    font-family: 宋体;
+    margin-top: 35px;
+}
+
+.input{
+    margin-left: 20px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+
+}
+.button{
+    margin-top: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    /* opacity: 1 !important; */
+}
+.intkuang{
+
+    margin-right: 5px;
+    margin-top: 10px;
+    width: 230px;
+    height: 40px;
+    float: right;
+    border-radius: 20px;
+    border: none;
+    background-color: #fff;
+
+}
+.myaudio{
+    display:inline-block;
+    width: 100%;
+    height: 300;
+    background-color: rgb(240, 240, 240);
+    border-bottom-left-radius:5px ;
+    border-bottom-right-radius:5px ;
+    border: none;
+    outline: none;
+}
+
+.centerimg{
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin-top: 50px;
+    margin-left: 50px;
+    position: absolute;
+        /* left: 50px;
+    top:  50px; */
+
+}
+.centerimg .blackcircle{
+    /* position: absolute; */
+    
+    width: 300px;
+    height: 300px;
+    /* opacity: 1 important; */
+}
+.cover{
+    /* position: absolute; */
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin-top: 100px;
+    margin-left: 100px;
+    border-radius: 100px;
+  
+}
+   /* 旋转 -----------------------------------------*/
+/* .playing{
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin-top: 100px;
+    margin-left: 100px;
+    border-radius: 100px;
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    -webkit-animation: rotate 10s linear infinite;
+    -moz-animation: rotate 10s linear infinite;
+    -o-animation: rotate 10s linear infinite;
+    animation: rotate 10s linear infinite;
+}
+@-webkit-keyframes rotate{
+    from{-webkit-transform: rotate(0deg)}
+    to{-webkit-transform: rotate(360deg)}
+}
+@-moz-keyframes rotate{
+    from{-moz-transform: rotate(0deg)}
+    to{-moz-transform: rotate(359deg)}
+}
+@-o-keyframes rotate{
+    from{-o-transform: rotate(0deg)}
+    to{-o-transform: rotate(359deg)}
+}
+@keyframes rotate{
+    from{transform: rotate(0deg)}
+    to{transform: rotate(359deg)}
+} */
+
+#left ul li{
+    margin-top: 2px;
+    display: inline-block;
+    width: 190px;
+    height: 38px;
+    line-height: 40px;
+    font-size: 14px;
+    border-bottom: rgba(0,0,0,0.2) groove 1px;
+    overflow: hidden;
+    /* color: pink; */
+    /* background-color: red; */
+
+}
+#left ul li:hover {background-color:aqua}
+
+.img1{
+    float: left;
+    margin: 8px 10px;
+    width: 20px;
+    height: 20px;
+
+}
+.img2{
+    float: right;
+    margin: 8px 0px;
+    width: 25px;
+    height: 25px;
+}
+
+#mname{
+    float: left;
+    width: 120px;
+    height: 40px;
+}
+
+.commentbox dl{
+    margin-top: 10px;
+    display: inline-block;
+    width: 190px;
+    /* height: 250px; */
+}
+
+.commentbox dl dt{
+    float: left;
+    width: 50px;
+    height: 200px;
+}
+.commentbox dl dt img{
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+}
+.commentbox dl .cname{
+    width: 140px;
+    height: 20px;
+    float: right; 
+    overflow: hidden; 
+}
+.commentbox dl .cc{
+    width: 140px;
+    height: 190px;
+    float: right;
+    overflow: hidden;
+    font-size: 10px;
+}
+
+.centername{
+    width: 250px;
+    margin-top: 80px;
+    margin-left: 75px;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-weight: bold;
+    
+}
+
+.mark{
+     left: 0px;
+    top: 0px; 
+    position: fixed;
+    width: 1920px;
+    height: 902px;
+    background-color: black;
+    opacity: 0.9;
+}
+
+video{
+    position: fixed;
+    z-index: 999;
+    left:370px;
+    height: 300px;
+    width: 700px;
+    height: 400px;
+}
+
+.last{
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin-top: -25px;
+    margin-left: 100px;
+}
+.next{
+    float: right;
+    margin-top: -25px;
+    margin-right: 100px;
+    width: 25px;
+    height: 25px;
+}
